@@ -1,0 +1,136 @@
+﻿@model ShopGiayHHL.Models.Cart
+@{
+    ViewBag.Title = "ShowToCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+    @if (Model == null)
+    {
+        <div class="spec ">
+            <h3>Giỏ hàng</h3>
+            <div class="ser-t">
+                <b></b>
+                <span><i></i></span>
+                <b class="line"></b>
+            </div>
+        </div>
+        <p class="text-info text-center" style="font-size:25px;">
+            Giỏ hàng của bạn trống!
+        </p>
+
+    }
+    else
+    {
+
+        <div class="container my-4">
+            <h1 class="text-center">GIỎ HÀNG</h1>
+
+            <div class="row my-4">
+
+                <div class="col-md-8">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:400px;">Tên sản phẩm</th>
+                                <th style="width:150px; text-align:center;">Hình sản phẩm</th>
+                                <th style="width:150px;">Giá</th>
+                                <th style="width:50px;">Số lượng</th>
+                                <th style="width:200px;">Tổng cộng</th>
+                                <th style="width:50px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Items)
+                            {
+                                double total = Convert.ToDouble(item._shopping_product.PriceBuy * item._shopping_quantity);
+                                <tr>
+                                    <td>@Html.DisplayFor(model => item._shopping_product.Name)</td>
+                                    <td>
+                                        <img src="~/Public/img/Product/@item._shopping_product.Img" style="width:100px; height:100px; margin-left:15px; " />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => item._shopping_product.PriceBuy)
+                                    </td>
+                                    <td>
+                                        @using (Html.BeginForm("Update_Quantity_Cart", "GioHang"))
+                                        {
+                                            <input type="hidden" value="@item._shopping_product.Id" name="Id" />
+                                            <input type="number" value="@item._shopping_quantity" name="Quantity" />
+                                            <input type="submit" value="Cập nhật" />
+                                        }
+
+
+                                    </td>
+                                    <td>
+                                         @total VNĐ
+                                    </td>
+                                    <td>
+                                        <a href="/GioHang/RemoveCart/@item._shopping_product.Id" style="color:red"><i class="fas fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2" class="text-center">
+                                    <a href="@Url.Action("Index","SanPham")" class="btn btn-outline-secondary">Mua thêm sản phẩm</a>
+                                </td>
+                                <td colspan="3" class="text-right">
+                                    @using (Html.BeginForm("CheckOut", "GioHang"))
+                                    {
+                                        <table style="border-collapse:separate; border-spacing:5px;">
+                                            <tr>
+                                                <td>Mã khách hàng:</td>
+                                                <td>
+                                                    <input type="number" name="CodeCustomer" required />
+
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Địa chỉ giao hàng:
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="Address_Deliver" required />
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a href="@Url.Action("Create","KhachHang")" class="btn btn-secondary">Đăng kí khách hàng</a>
+                                                </td>
+                                                <td>
+                                                    <input type="submit" value="Thanh Toán" class="btn btn-dark" />
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                    }
+                                </td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+
+                        </tfoot>
+                    </table>
+
+                </div>
+                <div class="col-md-4">
+                    <h3 class="text-center">THÔNG TIN ĐƠN HÀNG</h3>
+                    <p> Số sản phẩm: @Model.Total_SL()  sp</p>
+                    <p> Tổng tiền: @Model.Total_Money() VNĐ</p>
+                    <p> Phí vận chuyển : Free Ship </p>
+                    <p> Tổng Số Tiền Thanh Toán: @Model.Total_Money() VNĐ</p>
+                    
+                </div>
+            </div>
+        </div>
+
+    }

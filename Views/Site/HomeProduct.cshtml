@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ShopGiayHHL.Models.Products>
+
+<div class="row my-4 ">
+    @foreach (var products in Model)
+    {
+        <div class="col-md mt-4">
+            <div class="card" style="width: 100%;">
+                <a href="~/SanPham/Details/@products.Id">
+                    
+                    <img src="~/Public/img/Product/@products.Img" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body">
+                    <a href="~/SanPham/Details/@products.Id" style="text-decoration: none; color: #000000;">
+                        <h5 class="card-title">@products.Name</h5>
+                    </a>
+
+                    <h5 class="card-title">@string.Format("{0:#,### VNĐ}", products.PriceBuy)</h5>
+                    <a href="~/GioHang/AddToCart/@products.Id" class="btn btn-secondary">Đặt Mua</a>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>

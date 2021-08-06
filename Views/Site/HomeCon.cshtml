@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ShopGiayHHL.Models.Categorys>
+@{
+    ViewBag.Title = "HomeCon";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Action("SlideShow", "Module")
+
+<div class="container my-4 py-3">
+
+    <!---->
+
+
+    @foreach (var rowcat in Model)
+    {
+        <div class="row">
+            <div class="col-md-7">
+                <img src="~/Public/img/Category/converse.jpg" class="img-fluid" alt="Alternate Text" />
+            </div>
+            <div class="col-md-5">
+                <h3>@rowcat.Name</h3>
+
+                <p>
+                    @rowcat.MetaDesc
+                </p>
+                <a href="~/@rowcat.Slug">
+                    XEM TẤT CẢ <i class="fas fa-chevron-right"></i>
+                </a>
+
+            </div>
+        </div>
+        @Html.Action("HomeProduct", "Site", new { @catid = rowcat.Id });
+
+    }
+
+    <!---->
+
+
+</div>

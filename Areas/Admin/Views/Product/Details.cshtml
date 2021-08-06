@@ -1,0 +1,103 @@
+﻿@model ShopGiayHHL.Models.Products
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <strong class="text-danger text-uppercase">
+                    CHI TIẾT SẢN PHẨM
+                </strong>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="@Url.Action("Edit","Product",new { id = Model.Id })" class="btn btn-info btn-sm"><i class="fas fa-edit"></i> Chỉnh sửa</a>
+                <a href="@Url.Action("Index","Product")" class="btn btn-info btn-sm"><i class="fas fa-backward"></i> Quay về danh sách</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row my-4">
+                <div class="col-md-6">
+                    <img src="~/Public/img/Product/@Model.Img" class="img-fluid" alt="" />
+                </div>
+                <div class="col-md-6">
+
+                    <dl class="dl-horizontal">
+                        <dt>
+                            <label><strong>Số thứ tự sản phẩm</strong></label>
+
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CatId)
+                        </dd>
+
+                        <dt>
+                            <label><strong>Tên sản phẩm</strong></label>
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                        <dt>
+                            <label><strong>Chi tiết sản phẩm</strong></label>
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Detail)
+                        </dd>
+
+                        <dt>
+                            <label><strong>Giá sản phẩm</strong></label>
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.PriceBuy)
+                        </dd>
+
+                        <dt>
+                            <label><strong>Hình sản phẩm</strong></label>
+
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Img)
+
+                        </dd>
+
+                        <dt>
+                            <label><strong>Từ khóa SEO(*)</strong></label>
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.MetaKey)
+                        </dd>
+
+                        <dt>
+                            <label><strong>Mô Tả SEO(*)</strong></label>
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.MetaDesc)
+                        </dd>
+
+                        <dt>
+                            <label><strong>Trạng thái sản phẩm(*)</strong></label>
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Status)
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+
+        </div>    
+    </div>
+</div>
+

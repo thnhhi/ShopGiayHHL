@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ShopGiayHHL.Models.Products>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <strong class="text-danger text-uppercase">
+                    TẤT CẢ SẢN PHẨM
+                </strong>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="@Url.Action("Create","Product")" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Thêm</a>
+                <a href="@Url.Action("Trash","Product")" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Thùng rác</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="myTable" class="table table-bordered table-hover table-striped ">
+            <div class="row">
+                <div class="row">
+
+                    @foreach (var products in Model)
+                    {
+                        <div class="col-md-2 mt-4">
+                            <div class="card" style="width: 100%;">
+                                <img src="~/Public/img/Product/@products.Img" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <a href="~/Admin/Product/Details/@products.Id" style="text-decoration: none;color: #000000;"><h5 class="card-title">@products.Name</h5></a>
+                                    <h5 class="card-title">Giá: @string.Format("{0:#,### VNĐ}", products.PriceBuy)</h5>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </table>
+    </div>
+</div>
+@section header{
+
+    <link href="~/Public/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section footer{
+    <script src="~/Public/js/jquery.dataTables.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            jQuery('#myTable').DataTable();
+        });
+    </script>
+
+}
+
+
+

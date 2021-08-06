@@ -1,0 +1,90 @@
+﻿@model ShopGiayHHL.Models.Products
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong class="text-danger text-uppercase">
+                        THÊM SẢN PHẨM
+                    </strong>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button type="submit" class="btn btn-success btn-sm">
+                        <i class="fas fa-save"></i> Lưu[Thêm]
+                    </button>
+                    <a href="@Url.Action("Index","Product")" class="btn btn-info btn-sm"><i class="fas fa-backward"></i> Quay về danh sách</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <label><strong>Tên sản phẩm(*)</strong></label>
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tên sản phẩm" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Chi tiết sản phẩm(*)</strong></label>
+                        @Html.TextAreaFor(model => model.Detail, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Dòng sản phẩm</strong></label>
+                        @Html.TextAreaFor(model => model.MetaKey, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MetaKey, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Tính năng sản phẩm</strong></label>
+                        @Html.TextAreaFor(model => model.MetaDesc, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MetaDesc, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+                <div class="col-md-5">
+
+                    <div class="form-group">
+                        <label><strong>Loại sản phẩm(*)</strong></label>
+                        @Html.DropDownListFor(model => model.CatId, (SelectList)ViewBag.ListCat, "[Chọn loại]", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CatId, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Giá sản phẩm(*)</strong></label>
+                        @Html.EditorFor(model => model.PriceBuy, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PriceBuy, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Hình sản phẩm</strong></label>
+                        <input name="Img" type="file" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Trạng Thái sản phẩm(*)</strong></label>
+                        @Html.DropDownListFor(model => model.Status, new[]
+                            { new SelectListItem { Text ="Xuất Bản",Value="1" },
+                                new SelectListItem {Text="Chưa xuất bản",Value="2"}},
+                                new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

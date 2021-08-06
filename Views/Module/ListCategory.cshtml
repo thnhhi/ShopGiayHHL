@@ -1,0 +1,12 @@
+﻿@model IEnumerable<ShopGiayHHL.Models.Categorys>
+
+<ul class="list-group mb-2">
+    <li class="list-group-item active" style="background-color:black">DANH MỤC SẢN PHẨM</li>
+    @foreach (var cat1 in Model)
+    {
+        <li class="list-group-item">
+            <a href="~/@cat1.Slug" style="        text-decoration: none;
+        color: #000000;">@cat1.Name</a>
+        </li>
+    }
+</ul>

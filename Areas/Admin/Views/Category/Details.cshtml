@@ -1,0 +1,44 @@
+﻿@model ShopGiayHHL.Models.Categorys
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <strong class="text-danger text-uppercase">
+                    CHI TIẾT LOẠI SẢN PHẨM
+                </strong>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="@Url.Action("Edit","Category",new { id = Model.Id })" class="btn btn-info btn-sm"><i class="fas fa-edit"></i> Chỉnh sửa</a>
+                <a href="@Url.Action("Index","Category")" class="btn btn-info btn-sm"><i class="fas fa-backward"></i> Quay về danh sách</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row my-4">
+                <div class="col-md-6">
+                    <img src="~/Public/img/Category/@Model.Img" class="img-fluid" alt="" />
+                </div>
+                <div class="col-md-6">
+                    <h1>Tên loại sản phẩm: @Model.Name</h1>
+                    <hr />
+                    <h5>ID loại sản phẩm: @Model.Id</h5>
+                    <h5>Từ khóa SEO: @Model.MetaKey</h5>
+                    <h5>Mô tả SEO: @Model.MetaDesc</h5>
+                    <h5>Ngày tạo: @Model.Created_At</h5>
+                    <h5>Ngày chỉnh sửa: @Model.Updated_At</h5>
+                </div>
+            </div>
+
+        </div>
+
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+</div>

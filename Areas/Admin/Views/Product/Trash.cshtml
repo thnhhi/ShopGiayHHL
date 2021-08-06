@@ -1,0 +1,95 @@
+﻿@model IEnumerable<ShopGiayHHL.Models.Products>
+@{
+    ViewBag.Title = "Trash";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <strong class="text-danger text-uppercase">
+                    THÙNG RÁC SẢN PHẨM
+                </strong>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="@Url.Action("Index","Product")" class="btn btn-info btn-sm"><i class="fas fa-backward"></i> Quay về danh sách</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        @Html.Partial("_XMessage")
+        <table id="myTable" class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th style="width:20px;" class="text-center">#</th>
+                    <th style="width:80px;">
+                        Hình
+                    </th>
+                    <th>
+                        Tên sản phẩm
+                    </th>
+                    <th>
+                        Tên loại sản phẩm
+                    </th>
+                    <th>
+                        Ngày tạo
+                    </th>
+                    <th style="width:200px;" class="text-center">Chức năng</th>
+                    <th style="width:20px;" class="text-center">ID</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <input name="hhh" type="checkbox" />
+                        </td>
+                        <td>
+                            <img src="~/Public/img/Product/@item.Img" class="img-fluid" alt="Alternate Text" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CatId)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Created_At)
+                        </td>
+
+
+                        <td class="text-center">
+
+                            <a class="btn btn-warning btn-sm" href="@Url.Action("ReTrash","Product", new { id = item.Id })"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-danger btn-sm" href="@Url.Action("Delete","Product", new { id = item.Id })"><i class="fas fa-trash"></i></a>
+
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+@section header{
+
+    <link href="~/Public/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section footer{
+    <script src="~/Public/js/jquery.dataTables.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            jQuery('#myTable').DataTable();
+        });
+    </script>
+
+}
+

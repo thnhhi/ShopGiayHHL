@@ -1,0 +1,13 @@
+﻿
+
+@model List<ShopGiayHHL.Models.Products>
+@{
+    ViewBag.Title = "SearchByName";
+    ViewBag.Heading = "Danh sach cac san pham tim duoc";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var products in Model)
+{
+    @Html.Partial("Details", products)
+}

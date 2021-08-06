@@ -1,0 +1,69 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<ShopGiayHHL.Models.Products>
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product</h2>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            @Html.Action("ListCategory", "Module")
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong class="text-danger text-uppercase">
+                                TẤT CẢ SẢN PHẨM
+                            </strong>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="@Url.Action("Create","Product")" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Thêm</a>
+                            <a href="@Url.Action("Trash","Product")" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Thùng rác</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="myTable" class="table table-bordered table-hover table-striped ">
+                        <div class="row">
+                            <div class="row">
+
+                                @foreach (var products in Model)
+                                {
+                                    <div class="col-md-3 mt-2 mb-2">
+                                        <div class="card" style="width: 100%;">
+                                            <img src="~/Public/img/Product/@products.Img" class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <a href="~/SanPham/Details/@products.Id"><h6 class="card-title">@products.Name</h6></a>
+                                                <h5 class="card-title">@string.Format("{0:#,### VNĐ}", products.PriceBuy)</h5>
+                                                <a href="~/gio-hang" class="btn btn-primary">Đặt Mua</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="phantrang">
+                            @Html.PagedListPager(Model, page => Url.Action("Product","Site", new { page, size = ViewBag.currentSize }))
+                        </div>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

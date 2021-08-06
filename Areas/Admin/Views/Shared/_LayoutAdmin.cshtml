@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Public/css/LayoutAdmin.css" rel="stylesheet" />
+    <link href="~/Public/css/all.min.css" rel="stylesheet" />
+
+    @RenderSection("header", required: false)
+</head>
+<body>
+    <section class="header">
+        <div class="container">
+            <div class="row py-2">
+                <div class="col-md-3  ">
+                    <a href="~/"><img src="~/Public/img/LOGO.png" class="img-fluid" alt="logo" /></a>
+                </div>
+                <div class="col-md-5 text-right mt-md-5">
+
+                </div>
+                <div class="col-md-4 text-right mt-md-5">
+                    <a class="khoi" href="~/lien-he"><i class="fas fa-phone"></i></a>
+                    <a class="khoi" href="~/dang-nhap"><i class="fas fa-user"></i></a>
+                    <a class="khoi" href="~/gio-hang"><i class="fas fa-shopping-bag"></i></a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mainmenu bg-white">
+        <div class="container">
+            <div class="row py-2">
+                <div class="menuxl col-md-9 ">
+                    <nav class="navbar navbar-expand-lg navbar-light navbar-toggler">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="@Url.Action("Index","Dashboard")">Trang Chủ <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index","GioiThieu")">Giới Thiệu</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="@Url.Action("Index","SanPham")" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Sản Phẩm
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href=@Url.Action("Index","Product")>Danh sách sản phẩm</a>
+                                        <a class="dropdown-item" href=@Url.Action("Create","Product")>Thêm sản phẩm</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href=@Url.Action("Index","Category")>Danh sách loại sản phẩm</a>
+                                        <a class="dropdown-item" href=@Url.Action("Create","Category")>Thêm loại sản phẩm</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("PostTopic","Site")">Tin Tức</a>
+
+                                </li>
+                            </ul>
+
+                        </div>
+                    </nav>
+                </div>
+                <div class="ten col-md-3 mr-auto">
+                    @Html.Partial("_LoginPartial1")
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="maincontent my-4">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </section>
+    <section class="footer bg-dark">
+        <div class="container-fluid text-center py-3 text-white">
+            Design by HHL
+        </div>
+    </section>
+
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("footer", required: false)
+</body>
+</html>

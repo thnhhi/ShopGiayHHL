@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ShopGiayHHL.Models.Categorys>
+@{
+    ViewBag.Title = "Trash";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6 text-danger text-uppercase">
+                <strong>
+                    THÙNG RÁC LOẠI SẢN PHẨM
+                </strong>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="@Url.Action("Index","Category")" class="btn btn-info btn-sm"><i class="fas fa-backward"></i> Quay về danh sách</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        @Html.Partial("_XMessage")
+        <table id="myTable" class="table table-bordered table-hover table-striped">
+            
+                <tr>
+
+                    <th>
+                        Tên loại sản phẩm
+                    </th>
+                    <th>
+                        Đường dẫn
+                    </th>
+
+                    <th style="width:200px;" class="text-center">Chức năng</th>
+                    <th style="width:20px;" class="text-center">ID</th>
+                </tr>
+            
+
+            
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Slug)
+                        </td>
+
+                        <td class="text-center">
+                            
+                            <a class="btn btn-warning btn-sm" href="@Url.Action("ReTrash","Category", new { id = item.Id })"><i class="fas fa-trash-restore"></i></a>
+                            <a class="btn btn-danger btn-sm" href="@Url.Action("Delete","Category", new { id = item.Id })"><i class="fas fa-trash"></i></a>
+
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                    </tr>
+                }
+            
+
+        </table>
+    </div>
+</div>

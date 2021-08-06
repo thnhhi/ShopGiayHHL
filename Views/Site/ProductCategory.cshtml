@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ShopGiayHHL.Models.Products>
+
+@{
+    ViewBag.Title = "ProductCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ProductCategory</h2>
+
+<div class="row my-4 ">
+    @foreach (var products in Model)
+    {
+        <div class="col-md mt-4">
+            <div class="card" style="width: 100%;">
+                <img src="~/Public/img/Product/@products.Img" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <a href="~/SanPham/Details/@products.Id"><h5 class="card-title">@products.Name</h5></a>
+
+                    <h5 class="card-title">@string.Format("{0:#,### VNĐ}", products.PriceBuy)</h5>
+                    <a href="~/gio-hang" class="btn btn-info">Đặt Mua</a>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>

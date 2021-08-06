@@ -1,0 +1,58 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<ShopGiayHHL.Models.Products>
+@{
+    ViewBag.Title = "Supra - HHL Shoes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            @Html.Action("ListCategory", "Module")
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong class="text-dark text-uppercase">
+                                SUPRA
+                            </strong>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="myTable" class="table table-bordered table-hover table-striped ">
+                        <div class="row">
+                            <div class="row">
+
+                                @foreach (var products in Model)
+                                {
+                                    <div class="col-md-3 mt-2">
+                                        <div class="card" style="width: 100%;">
+                                            <img src="~/Public/img/Product/@products.Img" class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <a href="~/SanPham/Details/@products.Id" style="text-decoration: none;color: #000000;"><h6 class="card-title">@products.Name</h6></a>
+                                                <h5 class="card-title">@string.Format("{0:#,### VNĐ}", products.PriceBuy)</h5>
+                                                <a href="~/GioHang/AddToCart/@products.Id" class="btn btn-secondary">Đặt Mua</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="phantrang">
+                            @Html.PagedListPager(Model, page => Url.Action("HomeProductSu", "Site", new { page, size = ViewBag.currentSize }))
+                        </div>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
